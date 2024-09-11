@@ -12,8 +12,18 @@ function Form() {
     setShowLogin(true);
   };
 
+  const handleBack = () => {
+    // Aquí puedes añadir la lógica para manejar el botón "Atrás"
+    console.log('Back button clicked');
+  };
+
   return (
     <div className="form-container">
+      {/* Botón Atrás */}
+      <button className="btn btn-link back-button" onClick={handleBack}>
+        Atrás
+      </button>
+
       {/* Left Aside */}
       <aside className="form-left-aside">
         <div className="button-group">

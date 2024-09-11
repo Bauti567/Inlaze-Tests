@@ -1,0 +1,32 @@
+.rating-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .rating-circle {
+    position: relative;
+    transform: rotate(-90deg); /* Para empezar el círculo desde la parte superior */
+  }
+  
+  .rating-background {
+    stroke-linecap: round;
+  }
+  
+  .rating-progress {
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.35s; /* Suave animación */
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+  
+  .rating-text {
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  

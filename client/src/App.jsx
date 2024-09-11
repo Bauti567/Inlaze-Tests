@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import 'bootstrap/dist/js/bootstrap.bundle.min';
-import HomePage from './components/pages/HomePage';
+import React from 'react';
 import Form from './components/organisms/Form/Form';
+import Card from './components/molecules/Card/Card';
+import Rating from './components/atoms/Rating/Rating';
+import Favorites from './components/atoms/Favorites/Favorites';
 
 function App() {
-  return(
-    <Form></Form>
-    //<HomePage></HomePage>
-  )
+  return (
+    <>
+      <Form />
+      <Card />
+      <Rating percentage={50}/>
+      <Favorites/>
+    </>
+  );
 }
 
 export default App;
