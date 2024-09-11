@@ -6,7 +6,6 @@ import { ChangePasswordDto } from './dto/change-password.dto';
 import { Model } from 'mongoose';
 import { Users, UsersDocument } from 'src/users/schemas/users.schema';
 import { hash, compare } from 'bcrypt';
-import { checkPrime } from 'crypto';
 
 
 @Injectable()
@@ -29,8 +28,7 @@ export class AuthService {
       const checkPassword = await compare(password, findUser.password)
       if(!checkPassword) throw new HttpException('Password Incorrect', 403)
       const data = findUser
-      const payload = {}
-
+    
       return data;
   }
 
