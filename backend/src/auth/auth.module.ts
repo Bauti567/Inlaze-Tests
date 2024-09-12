@@ -6,6 +6,7 @@ import { Users,UserSchema } from 'src/users/schemas/users.schema';
 import { User } from 'src/users/entities/user.entity';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from './jwt.constants';
 
 @Module({
   imports: [
@@ -14,9 +15,14 @@ import { JwtModule } from '@nestjs/jwt';
       schema: UserSchema
       
     }]),
-    
-    
+    // Jwt Tokens import
+    JwtModule.register({
+      global: true,
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '1h' },
+    }),
   ],
+  
   controllers: [AuthController],
   providers: [AuthService],
 })

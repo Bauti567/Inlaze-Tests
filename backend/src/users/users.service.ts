@@ -11,4 +11,8 @@ export class UsersService {
     return 'This action adds a new user';
   }
 
+  async findAll(){
+    
+  }
+
 }

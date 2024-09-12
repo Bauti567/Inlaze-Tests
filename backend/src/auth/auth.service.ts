@@ -6,11 +6,15 @@ import { ChangePasswordDto } from './dto/change-password.dto';
 import { Model } from 'mongoose';
 import { Users, UsersDocument } from 'src/users/schemas/users.schema';
 import { hash, compare } from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 
 @Injectable()
 export class AuthService {
-  constructor(@InjectModel(Users.name) private readonly userModel: Model<UsersDocument> ){    
+  constructor(
+    @InjectModel(Users.name) private readonly userModel: Model<UsersDocument>, 
+    private jwtAuthService: JwtService
+  ){    
   }
 
   async Register(userObject: RegisterAuthDto){
@@ -25,11 +29,21 @@ export class AuthService {
     const findUser = await this.userModel.findOne({email})
     if(!findUser) new HttpException('User Not found', 404)
 
-      const checkPassword = await compare(password, findUser.password)
-      if(!checkPassword) throw new HttpException('Password Incorrect', 403)
-      const data = findUser
-    
-      return data;
+    const checkPassword = await compare(password, findUser.password)
+    if(!checkPassword) throw new HttpException('Password Incorrect', 403)
+      
+      const payload = {
+        id: findUser.id,
+        name: findUser.name
+      }
+
+      const token = this.jwtAuthService.sign(payload)
+      const data = {
+      user: findUser,
+      token
+    }
+    return data;
+
   }
 
   // Cambio de contraseña
